@@ -1,10 +1,16 @@
 import picopackLogo from "@images/picopack_logo.png";
+import { MouseEvent } from "react";
 
 type LogoProps = {
-  onClickHandler: () => void;
+  onClick: (e: MouseEvent<HTMLImageElement>) => void;
 };
 const Logo = (props: LogoProps) => (
-  <img src={picopackLogo} alt="Picopack Logo" className="h-2/4 w-auto" />
+  <img
+    onClick={props.onClick}
+    src={picopackLogo}
+    alt="Picopack Logo"
+    className="h-2/4 w-auto cursor-pointer"
+  />
 );
 
 export default Logo;

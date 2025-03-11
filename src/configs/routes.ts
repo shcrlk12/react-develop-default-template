@@ -1,27 +1,40 @@
-type RoutesType = {
-  URL: string;
-  children?: Record<string, RoutesType>;
+type RouteNode<T extends string = string> = {
+  URL: T;
+  children?: {
+    [key: string]: RouteNode;
+  };
 };
 
-export const ORIGINAL_ROUTES: Record<string, RoutesType> = {
+const createRoutes = <T extends Record<string, RouteNode>>(
+  routes: T,
+  basePath: string = ""
+): T => {
+  const newRoutes = {} as T;
+
+  for (const key in routes) {
+    const fullPath = basePath + routes[key].URL;
+    newRoutes[key] = {
+      ...routes[key],
+      URL: fullPath,
+    };
+
+    if (routes[key].children) {
+      newRoutes[key].children = createRoutes(routes[key].children, fullPath);
+    }
+  }
+
+  return newRoutes;
+};
+
+const ORIGINAL_ROUTES = {
   HOME: {
-    URL: "/home",
-    children: {
-      HOME_TEST1: {
-        URL: "/home-test1",
-        children: {
-          TEST4: { URL: "/test4" },
-          TEST5: { URL: "/test5" },
-        },
-      },
-      HOME_TEST2: {
-        URL: "/home-test2",
-        children: {
-          TEST6: { URL: "/test6" },
-          TEST7: { URL: "/test7" },
-        },
-      },
-    },
+    URL: "/",
+  },
+  LOGIN: {
+    URL: "/login",
+  },
+  LOGOUT: {
+    URL: "/logout",
   },
   TUBE_AGING: {
     URL: "/tube-aging",
@@ -42,32 +55,17 @@ export const ORIGINAL_ROUTES: Record<string, RoutesType> = {
       },
     },
   },
+  USER: {
+    URL: "/user",
+    children: {
+      USER_INFORMATION: {
+        URL: "/user-information",
+      },
+      USER_MANAGEMENT: {
+        URL: "/user-management",
+      },
+    },
+  },
 } as const;
-
-const createRoutes = (
-  originalRoutes: Record<string, RoutesType>,
-  convertedRoutes: Record<string, RoutesType> = {},
-  basePath: string = ""
-): Record<string, RoutesType> => {
-  const newRoutes: Record<string, RoutesType> = convertedRoutes; // routes가 없으면 초기화
-
-  for (const key in originalRoutes) {
-    // URL을 누적하여 생성
-    const fullPath = basePath + originalRoutes[key].URL;
-    newRoutes[key] = { URL: fullPath };
-
-    // children이 있으면 재귀 호출
-    if (originalRoutes[key].children) {
-      newRoutes[key].children = {}; // children 속성 초기화
-      createRoutes(
-        originalRoutes[key].children,
-        newRoutes[key].children,
-        fullPath
-      );
-    }
-  }
-
-  return newRoutes;
-};
 
 export const ROUTES = createRoutes(ORIGINAL_ROUTES);

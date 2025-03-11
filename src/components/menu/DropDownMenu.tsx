@@ -1,6 +1,6 @@
+import { GlobalMenuItem } from "@src/configs/menu";
 import clsx from "clsx";
 import { useLocation } from "react-router-dom";
-import type { GlobalMenuItem } from "src/configs/types";
 import useNavigationTo from "src/hooks/useNavigationTo";
 
 /**Types */

@@ -12,7 +12,7 @@ const LocalSubMenuBar = (props: LocalSubMenuBarProps) => {
 
   return (
     <nav>
-      <MenuContainer>
+      <MenuContainer className="bg-sky-600 h-6">
         {props.menu.map(
           (globalMenuItem) =>
             location.pathname.startsWith(globalMenuItem.link) &&
@@ -20,7 +20,10 @@ const LocalSubMenuBar = (props: LocalSubMenuBarProps) => {
               (localMenuItem) =>
                 location.pathname.startsWith(localMenuItem.link) &&
                 localMenuItem.localSubMenu?.map((localSubMenuItem) => (
-                  <MenuItem menuItem={localSubMenuItem} />
+                  <MenuItem
+                    menuItem={localSubMenuItem}
+                    className="text-xs font-normal"
+                  />
                 ))
             )
         )}

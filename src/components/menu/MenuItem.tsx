@@ -4,6 +4,7 @@ import clsx from "clsx";
 
 type MenuItemProps = {
   menuItem: LocalMenuItem | LocalSubMenuItem;
+  className?: string;
 };
 
 const MenuItem = (props: MenuItemProps) => {
@@ -16,8 +17,9 @@ const MenuItem = (props: MenuItemProps) => {
       <button
         onClick={() => navTo(props.menuItem.link)}
         className={clsx(
-          "flex justify-center items-center px-10 text-white text-sm font-bold h-full cursor-pointer hover:bg-black hover:scale-105 transaction-all duration-200",
-          { "selected-menu": isActive }
+          "flex justify-center items-center px-10 text-white text-sm font-bold h-full cursor-pointer hover:bg-sky-950 hover:scale-105 transaction-all duration-200 border-r-[1px] border-solid border-sky-950",
+          { "selected-menu": isActive },
+          props.className
         )}
       >
         {props.menuItem.title}

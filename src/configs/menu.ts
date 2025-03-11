@@ -1,50 +1,21 @@
-import { Authority } from "./authority";
+import { Authority, AuthorityType } from "./authority";
 import { ROUTES } from "./routes";
-import { GlobalMenuItem } from "./types";
 
 export const MENU_ITEMS: GlobalMenuItem[] = [
   {
-    title: "Home",
-    link: ROUTES.HOME.URL,
-    minAuthority: Authority.User,
+    title: "User",
+    link: ROUTES.USER.URL,
+    minAuthority: Authority.Admin,
     localMenu: [
       {
-        title: "Home Test1",
-        link: ROUTES.HOME.children?.HOME_TEST1.URL as string,
-        minAuthority: Authority.User,
-        localSubMenu: [
-          {
-            title: "Test4",
-            link: ROUTES.HOME.children?.HOME_TEST1.children?.TEST4
-              .URL as string,
-            minAuthority: Authority.User,
-          },
-          {
-            title: "Test5",
-            link: ROUTES.HOME.children?.HOME_TEST1.children?.TEST5
-              .URL as string,
-            minAuthority: Authority.User,
-          },
-        ],
+        title: "User information",
+        link: ROUTES.USER.children.USER_INFORMATION.URL,
+        minAuthority: Authority.Admin,
       },
       {
-        title: "Home Test2",
-        link: ROUTES.HOME.children?.HOME_TEST2.URL as string,
-        minAuthority: Authority.User,
-        localSubMenu: [
-          {
-            title: "Test6",
-            link: ROUTES.HOME.children?.HOME_TEST2.children?.TEST6
-              .URL as string,
-            minAuthority: Authority.User,
-          },
-          {
-            title: "Test7",
-            link: ROUTES.HOME.children?.HOME_TEST2.children?.TEST7
-              .URL as string,
-            minAuthority: Authority.User,
-          },
-        ],
+        title: "User Management",
+        link: ROUTES.USER.children.USER_MANAGEMENT.URL,
+        minAuthority: Authority.Admin,
       },
     ],
   },
@@ -55,38 +26,36 @@ export const MENU_ITEMS: GlobalMenuItem[] = [
     localMenu: [
       {
         title: "Simulation Data",
-        link: ROUTES.TUBE_AGING.children?.SIMULATION_DATA.URL as string,
+        link: ROUTES.TUBE_AGING.children.SIMULATION_DATA.URL,
         minAuthority: Authority.User,
         localSubMenu: [
           {
             title: "Turn On",
-            link: ROUTES.TUBE_AGING.children?.SIMULATION_DATA.children?.TURN_ON
-              .URL as string,
+            link: ROUTES.TUBE_AGING.children.SIMULATION_DATA.children.TURN_ON
+              .URL,
             minAuthority: Authority.User,
           },
           {
             title: "Pre-IV",
-            link: ROUTES.TUBE_AGING.children?.SIMULATION_DATA.children?.PRE_IV
-              .URL as string,
+            link: ROUTES.TUBE_AGING.children.SIMULATION_DATA.children.PRE_IV
+              .URL,
             minAuthority: Authority.User,
           },
         ],
       },
       {
         title: "Select Report",
-        link: ROUTES.TUBE_AGING.children?.SELECT_REPORT.URL as string,
+        link: ROUTES.TUBE_AGING.children.SELECT_REPORT.URL,
         minAuthority: Authority.User,
         localSubMenu: [
           {
             title: "Test1",
-            link: ROUTES.TUBE_AGING.children?.SELECT_REPORT.children?.TEST1
-              .URL as string,
+            link: ROUTES.TUBE_AGING.children.SELECT_REPORT.children.TEST1.URL,
             minAuthority: Authority.User,
           },
           {
             title: "Test2",
-            link: ROUTES.TUBE_AGING.children?.SELECT_REPORT.children?.TEST2
-              .URL as string,
+            link: ROUTES.TUBE_AGING.children.SELECT_REPORT.children.TEST2.URL,
             minAuthority: Authority.User,
           },
         ],
@@ -94,3 +63,23 @@ export const MENU_ITEMS: GlobalMenuItem[] = [
     ],
   },
 ] as const;
+
+export type GlobalMenuItem = {
+  title: string;
+  link: string;
+  minAuthority: AuthorityType;
+  localMenu?: LocalMenuItem[];
+};
+
+export type LocalMenuItem = {
+  title: string;
+  link: string;
+  minAuthority: AuthorityType;
+  localSubMenu?: LocalSubMenuItem[];
+};
+
+export type LocalSubMenuItem = {
+  title: string;
+  link: string;
+  minAuthority: AuthorityType;
+};

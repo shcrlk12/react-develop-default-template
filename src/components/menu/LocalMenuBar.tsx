@@ -13,7 +13,7 @@ const LocalMenuBar = (props: SubHeaderProps) => {
 
   return (
     <nav>
-      <MenuContainer>
+      <MenuContainer className="bg-[#42A5f5]">
         {props.menu.map(
           (globalMenuItem) =>
             location.pathname.startsWith(globalMenuItem.link) &&

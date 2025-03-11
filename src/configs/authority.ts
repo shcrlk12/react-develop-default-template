@@ -1,7 +1,7 @@
 export enum Authority {
   Anonymous = 1,
   User = 2,
-  Manger = 3,
+  Manager = 3,
   Admin = 4,
 }
 
