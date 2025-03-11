@@ -1,0 +1,58 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": [
+        "src/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@configs/*": [
+        "src/configs/*"
+      ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@images/*": [
+        "src/assets/images/*"
+      ],
+    },
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude" : [".next"]
+}
