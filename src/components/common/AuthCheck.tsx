@@ -1,4 +1,4 @@
-import { ROUTES } from "@src/configs";
+import { ROUTES } from "@src/configs/routes";
 import { Authority } from "@src/configs/authority";
 import React from "react";
 import { Navigate } from "react-router-dom";
